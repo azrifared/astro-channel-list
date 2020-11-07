@@ -68,13 +68,18 @@ const searchObservable = (searchString: string) => from([searchString]).pipe(
 const sortDataObservable = (sortType: string) => switchMapData(
   (state: AsyncState<ChannelResponseType>) => {
     if (DROPDOWN_LIST[0] === sortType) {
-      console.log(state);
-      return from([state]);
+      const sortedItems = R.pipe(
+        R.pathOr([], ['data', 'response']),
+        R.sortBy(R.compose(R.toLower, R.prop('title'))),
+      )(state);
+      const newState =  R.set(R.lensPath(['data', 'response']), sortedItems, state);
+
+      return from([newState]);
     }
 
     return from([state]);
   }
-)
+);
 
 const sortObservable = (sortType: string) => from([sortType]).pipe(
   fetchChannelObservable,

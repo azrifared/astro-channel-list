@@ -1,18 +1,6 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { px2vw } from '../../utils';
-
-const defaultContainer = css`
-  margin: ${px2vw(32)};
-
-  @media (min-width: 1024px) {
-    margin: ${px2vw(10)} ${px2vw(50)};
-  }
-
-  @media (min-width: 1366px) {
-    margin-top: ${px2vw(10)} ${px2vw(200)};
-  }
-`;
-
+import { defaultContainer } from '../../styled';
 
 export const HeaderContainer = styled.div`
   ${defaultContainer}

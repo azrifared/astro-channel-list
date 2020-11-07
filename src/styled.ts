@@ -1,5 +1,17 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle, css } from 'styled-components';
 import { px2vw } from './utils';
+
+export const defaultContainer = css`
+  margin: ${px2vw(32)};
+
+  @media (min-width: 1024px) {
+    margin: ${px2vw(10)} ${px2vw(50)};
+  }
+
+  @media (min-width: 1366px) {
+    margin-top: ${px2vw(10)} ${px2vw(200)};
+  }
+`;
 
 
 export const Global = createGlobalStyle`

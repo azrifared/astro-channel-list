@@ -1,6 +1,7 @@
-import { from, Observable } from 'rxjs';
-import { startWith, switchMap } from 'rxjs/operators';
-import { useObservable } from 'observable-hooks';
+import * as R from 'ramda';
+import { startWith, switchMap, map, shareReplay } from 'rxjs/operators';
+import { fromEvent, of, from, Observable } from 'rxjs';
+import qs from 'qs';
 
 export const ACTION_STATE = {
   NONE: 'none',
@@ -8,6 +9,10 @@ export const ACTION_STATE = {
   COMPLETED: 'completed',
   ERROR: 'error',
 } as const;
+
+export type HashProp = {
+  [key: string]: string,
+};
 
 export type ActionStateType = typeof ACTION_STATE[keyof typeof ACTION_STATE];
 
@@ -39,21 +44,6 @@ export const mapPromiseToAsyncStateObservable = <TResult>(promise: Promise<TResu
   return from(mappedPromise).pipe(startWith(initialState));
 };
 
-export const switchMapPromise = <TState, TInputs>(getPromise: (inputs: TInputs) => Promise<TState>) => switchMap(
-  (inputs: TInputs) => mapPromiseToAsyncStateObservable(getPromise(inputs)),
-);
-
-export const usePromiseAsObservable = <TState, TInputs extends Readonly<any[]>>(
-  getPromise: (inputs$: TInputs) => Promise<TState>,
-  inputs: TInputs,
-): Observable<AsyncState<TState>> => useObservable(
-  (inputs$) => inputs$.pipe(
-    switchMapPromise(getPromise),
-  ),
-  inputs,
-);
-
-
 export const switchMapData = (
   <
     T,
@@ -67,4 +57,30 @@ export const switchMapData = (
       return fnc(state);
     })
   )
+);
+
+const getHash = () => qs.parse(window.location.hash.slice(1));
+
+const mapKey = (fnc: (key: string) => string) => R.pipe(
+  R.toPairs,
+  R.map(([key, value]) => [fnc(key), value]),
+  R.fromPairs,
+) as (obj: HashProp) => HashProp;
+
+const withSecondArgument = <T, K>(fnc: (arg: K) => T) => (__: any, arg: K) => fnc(arg);
+
+const getKeySpace = (space: string) => R.pipe(
+  R.pickBy(withSecondArgument(R.startsWith(`${space}.`))) as (obj: HashProp) => HashProp,
+  mapKey(R.drop(space.length + 1)),
+);
+
+const hashChangeObservable = fromEvent(window, 'hashchange').pipe(
+  startWith(getHash()),
+  switchMap(() => of(getHash())),
+  shareReplay(1),
+);
+
+export const hashObservable = (space: string) => from(hashChangeObservable).pipe(
+  map(getKeySpace(space)),
+  shareReplay(1),
 );

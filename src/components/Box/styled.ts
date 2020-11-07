@@ -11,7 +11,7 @@ export const BoxContainer = styled.div`
   min-height: ${px2vw(200, 500)};
   margin: ${px2vw(20)};
   background-color: white;
-
+  cursor: pointer;
   @media (min-width: 1024px) {
     width: ${px2vw(410)};
     min-height: ${px2vw(200)};
