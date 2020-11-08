@@ -27,14 +27,22 @@ export type ChannelType = {
   title: string;
 };
 
+
+export type FilterList = {
+  Categories?: string[];
+  Language?: string[];
+  Resolution?: string[];
+}
+
 export type ChannelResponseType = {
   response: ChannelType[];
   responseCode: number;
-  responseMessage: string
+  responseMessage: string;
+  filteredList?: FilterList;
 };
 
 export type ScheduleDetail = {
-  dateTime: string;
+  datetime: string;
   dateTimeInUtc: string;
   detailUrl: string;
   duration: string;

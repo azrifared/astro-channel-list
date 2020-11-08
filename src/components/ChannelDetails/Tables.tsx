@@ -1,30 +1,31 @@
 import React from 'react';
 import styled from 'styled-components';
+import { ChannelDetailSchedule } from '../../api';
+import { mapData } from './helpers';
+import Navbar from './TopNavbar';
+import { px2vw } from '../../utils';
 
-const TableContainer = styled.div`
+type TablesProps = {
+  items: ChannelDetailSchedule;
+};
 
-`;
-
-const NavbarContainer = styled.div`
-`;
-
-const Navbar = styled.div`
-`;
-
-const BodyContainer = styled.div`
-`;
-
-const Tables = () => {
+const Tables = ({ items }: TablesProps) => {
+  const data = mapData(items);
 
   return (
     <TableContainer>
-      <NavbarContainer>
-        <Navbar></Navbar>
-      </NavbarContainer>
-      <BodyContainer>
-      </BodyContainer>
+      <Navbar data={data}/>
     </TableContainer>
   );
 };
+
+const TableContainer = styled.div`
+  margin-top: ${px2vw(100)};
+
+  @media (min-width: 1024px) {
+    margin-top: ${px2vw(50)};
+  }
+`;
+
 
 export default Tables;

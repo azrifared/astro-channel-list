@@ -20,7 +20,7 @@ const Input = styled.input`
 const SearchField = () => (
   <Input 
     type='text'
-    placeholder='Search channel name or number here...'
+    placeholder='Search channel by name or number...'
     onChange={(e) => {
       channelActionSubject.next({ searchString: e.target.value })
     }}

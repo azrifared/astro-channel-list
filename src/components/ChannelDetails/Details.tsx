@@ -21,7 +21,7 @@ const Details = ({ item }: DetailsProps) => (
       </HeaderContainer>
     </Top>
     <Description>{item?.description}</Description>
-    <Tables />
+    <Tables items={item?.schedule} />
   </Container>
 );
 

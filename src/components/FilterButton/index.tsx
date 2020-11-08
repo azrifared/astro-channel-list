@@ -2,8 +2,12 @@ import React from 'react';
 import styled from 'styled-components'
 import { px2vw } from '../../utils';
 
-const FilterButton = () => (
-  <ButtonContainer>
+type FilterButtonProps = {
+  setOpen: () => void;
+};
+
+const FilterButton = ({ setOpen }: FilterButtonProps) => (
+  <ButtonContainer onClick={setOpen}>
     <Button>Filter channels</Button>
   </ButtonContainer>
 );

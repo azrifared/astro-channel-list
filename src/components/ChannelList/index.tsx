@@ -11,15 +11,16 @@ const ChannelList = () => {
 
   useEffect(() => {
     channelActionSubject.next();
-  }, [])
+  }, []);
+
+  const { loading, data } = channelListState;
 
   const renderContent = () => {
-    const { loading, data } = channelListState;
 
     if (loading) return <Spinner />;
-
+    console.log(data?.filteredList)
     if (data.response.length === 0) return <Message>No records found.</Message>
-
+  
     return (
       <>
         {data?.response?.map((item) => <Box key={Math.random()} item={item}/>)}
@@ -30,7 +31,7 @@ const ChannelList = () => {
   return (
     <>
       <HeaderContainer>
-        <Bar />
+        <Bar filterList={data?.filteredList}/>
       </HeaderContainer>
       <BodyContainer>
         {renderContent()}

@@ -22,7 +22,7 @@ export const Global = createGlobalStyle`
   }
   :root {
       font-size: ${px2vw(24)};
-
+      font-family: Segoe UI;
       @media (min-width: 768px) {
         font-size: ${px2vw(18)};
       }

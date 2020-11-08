@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { ChannelType } from '../../api';
 import { BoxContainer } from './styled';
 import Bottom from './Bottom';
