@@ -16,20 +16,18 @@ type SidebarProps = {
 };
 
 
-const Sidebar = ({ setClose, filterList }: SidebarProps) => {
-  return (
-    <>
-      <Overlay />
-      <StyledSidebar>
-        <Content>
-          <ButtonContainer onClick={setClose}>
-            <CloseButton />
-          </ButtonContainer>
-          <List onClose={setClose} filterList={filterList} />
-        </Content>
-      </StyledSidebar>
-    </>
-  );
-};
+const Sidebar = ({ setClose, filterList }: SidebarProps) => (
+  <>
+    <Overlay />
+    <StyledSidebar>
+      <Content>
+        <ButtonContainer onClick={setClose}>
+          <CloseButton />
+        </ButtonContainer>
+        <List onClose={setClose} filterList={filterList} />
+      </Content>
+    </StyledSidebar>
+  </>
+);
 
 export default Sidebar;

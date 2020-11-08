@@ -21,7 +21,7 @@
   "bugs": {
     "url": "https://github.com/azrifared/astro-channel-list/issues"
   },
-  "homepage": "https://github.com/azrifared/astro-channel-list#readme",
+  "homepage": "http://azrifared.github.io/astro-channel-list",
   "devDependencies": {
     "@types/react": "^16.9.55",
     "@types/react-dom": "^16.9.9",
