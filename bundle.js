@@ -36,7 +36,7 @@ eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod)
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
-eval("\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nexports.fetchChannelLists = function () { return fetch('https://contenthub-api.eco.astro.com.my/channel/all.json').then(function (res) { return res.json(); }); };\r\nexports.fetchChannelDetails = function (id) { return fetch(\"https://contenthub-api.eco.astro.com.my/channel/\" + id + \".json\").then(function (res) { return res.json(); }); };\r\n\n\n//# sourceURL=webpack://astro-channel-list/./src/api/index.ts?");
+eval("\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nexports.fetchChannelLists = function () { return fetch('https://contenthub-api.eco.astro.com.my/channel/all.json').then(function (res) { return res.json(); }); };\r\nexports.fetchChannelDetails = function (id) { return fetch(\"https://contenthub-api.eco.astro.com.my/channel/\" + (id !== null && id !== void 0 ? id : '95') + \".json\").then(function (res) { return res.json(); }); };\r\n\n\n//# sourceURL=webpack://astro-channel-list/./src/api/index.ts?");
 
 /***/ }),
 
